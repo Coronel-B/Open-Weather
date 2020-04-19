@@ -1,1 +1,6 @@
 API: https://openweathermap.org/forecast5
+
+ . Clean architecture by layers
+ . MVVM
+ . ViewBinding
+ . Coroutine
