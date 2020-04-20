@@ -1,6 +1,16 @@
-apply plugin: 'java-library'
-apply plugin: 'org.jetbrains.kotlin.jvm'
+/**
+ * https://stackoverflow.com/a/58845685/5279996
+ * https://stackoverflow.com/a/26861186/5279996
+ */
+apply plugin: "com.android.library"
+apply plugin: 'kotlin-android'
 
+/*apply plugin: 'kotlin'
+apply plugin: 'org.jetbrains.kotlin.jvm'*/
+
+/**
+ * PRE:
+ */
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
@@ -12,6 +22,8 @@ dependencies {
         exclude module: 'okhttp'
     }
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
 }
 
 sourceCompatibility = "7"

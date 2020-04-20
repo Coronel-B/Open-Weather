@@ -21,11 +21,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", "\"openweathermap.org\"")
+            buildConfigField("String", "APP_ID", "\"d6842bc2ee8ad484e20158713143979d\"")
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", "\"openweathermap.org\"")
+            buildConfigField("String", "APP_ID", "\"<YOUR-KEY>\"")
         }
     }
 
@@ -84,6 +86,9 @@ dependencies {
         exclude module: 'okhttp'
     }
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+//    Cardview
+    implementation 'androidx.cardview:cardview:1.0.0'
 
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
