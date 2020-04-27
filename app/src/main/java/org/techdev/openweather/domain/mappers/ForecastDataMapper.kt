@@ -18,7 +18,8 @@ class ForecastDataMapper {
         ForecastList(
             forecast.city.name,
             forecast.city.country,
-            convertForecastListToDomain(forecast.list))
+            convertForecastListToDomain(forecast.list)
+        )
 
     /**
      * Convert the forecast list from the data to the domain model

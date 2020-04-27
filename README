@@ -1,6 +1,19 @@
+Consulta de clima para visualizar el pronóstico actual próximos 5 días de la ciudad actual y de otras ciudades.
+
 API: https://openweathermap.org/forecast5
 
- . Clean architecture by layers
+Services: https://www.getpostman.com/collections/b19476568e160caa73f1
+
+ . Clean architecture
  . MVVM
  . ViewBinding
  . Coroutine
+ . Retrofit for REST api communication
+
+
+
+References:
+ . https://github.com/android/architecture-components-samples/tree/master/GithubBrowserSample
+ . https://github.com/shawnlinboy/retrofit-livedata-adapter
+ . https://proandroiddev.com/using-retrofit-2-with-kotlin-coroutines-cb112f0fb738
+        https://github.com/zedlabs/WallPortal

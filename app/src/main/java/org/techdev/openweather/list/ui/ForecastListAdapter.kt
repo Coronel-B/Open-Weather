@@ -3,7 +3,7 @@ package org.techdev.openweather.list.ui
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.techdev.openweather.domain.Forecast
+import org.techdev.openweather.data.repository.Forecast
 
 private const val NEXT_FIVE_DAYS = 5;
 

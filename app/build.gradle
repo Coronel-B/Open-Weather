@@ -20,14 +20,12 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", "\"openweathermap.org\"")
+            buildConfigField("String", "BASE_URL", "\"https://openweathermap.org/api\"")
             buildConfigField("String", "APP_ID", "\"d6842bc2ee8ad484e20158713143979d\"")
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", "\"openweathermap.org\"")
-            buildConfigField("String", "APP_ID", "\"<YOUR-KEY>\"")
         }
     }
 
@@ -53,10 +51,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation project(':data')
-    implementation project(':domain')
-    implementation project(':usecases')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'

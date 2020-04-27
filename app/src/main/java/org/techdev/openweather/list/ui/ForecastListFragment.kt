@@ -1,6 +1,7 @@
 package org.techdev.openweather.list.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -46,10 +47,14 @@ class ForecastListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        viewModel.getForecast()
+
         viewModel.forecastResult.observe(this, Observer {
 
-//            TODO: Set Adapter
-//            binding.listRecyclerView.adapter = ForecastListAdapter()
+            Log.d("TEST", it.toString())
+
+    //            TODO: Set Adapter
+    //            binding.listRecyclerView.adapter = ForecastListAdapter()
 
 
         })
