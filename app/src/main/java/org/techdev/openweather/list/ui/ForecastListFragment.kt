@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import org.techdev.openweather.databinding.FragmentListForecastBinding
 import org.techdev.openweather.list.vm.ForecastListVM
+import org.techdev.openweather.util.ScreenState
 
 /**
  * PRO: Render a list of daily forecasts for the next 5 days
@@ -25,7 +26,6 @@ class ForecastListFragment : Fragment() {
 
     private lateinit var viewModel: ForecastListVM
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,10 +35,6 @@ class ForecastListFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get()
 
-        viewModel.progressVisiblity.observe(this, Observer { visible ->
-            binding.listProgressBar.visibility = if (visible) VISIBLE else GONE
-        })
-
         binding.listRecyclerView.layoutManager = LinearLayoutManager(context)
 
         return binding.root
@@ -46,22 +42,28 @@ class ForecastListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        viewModel.getForecast()
-
-        viewModel.forecastResult.observe(this, Observer {
-
-            Log.d("TEST", it.toString())
-
-    //            TODO: Set Adapter
-    //            binding.listRecyclerView.adapter = ForecastListAdapter()
-
-
-        })
-
-
+/*
+        setupObservers()
+        getForecasts()*/
     }
 
+/*
+    private fun setupObservers() {
+        viewModel.mutableScreenState.observe(this, Observer {
+            binding.listProgressBar.visibility = if (it == ScreenState.LOADING) VISIBLE else GONE
+        })
 
+        viewModel.forecasts.observe(this, Observer {
+            Log.d("TEST", it.toString())
+
+            //            TODO: Set Adapter
+//            binding.listRecyclerView.adapter = ForecastListAdapter()
+        })
+    }
+
+    private fun getForecasts() {
+        viewModel.getForecasts()
+    }
+*/
 
 }

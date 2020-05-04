@@ -9,11 +9,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ForecastRepository() {
+class ForecastRepository {
+
 
 //    private val forecastService: ForecastService = TODO()
 
-    private var client = RetrofitService.createService(ForecastService::class.java)
+    private var client: ForecastService = RetrofitService.createService(ForecastService::class.java)
+
 
     /*fun getForecastResult(): MutableLiveData<ForecastResult> {
         return TODO()
@@ -21,12 +23,10 @@ class ForecastRepository() {
 */
 
     /**
-     * TODO:
      * simplified version of the retrofit call that comes from support with coroutines
      * Note that this does NOT handle errors, to be added
      */
-    fun getForecastString(): MutableLiveData<JsonObject> { //TODOpenweathermap.org/api
-//        return client.getForecast()
+    fun getForecastResult(): MutableLiveData<JsonObject> {
         val forecast = MutableLiveData<JsonObject>()
         client.getForecast().clone().enqueue(object : Callback<JsonObject>{
 
@@ -35,7 +35,7 @@ class ForecastRepository() {
                 forecast.value = null
             }
 
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+            override fun onResponse(cFall: Call<JsonObject>, response: Response<JsonObject>) {
                 Log.d("ForecastRepository", "onResponse()")
                 Log.d("TEST", response.body().toString())
                 forecast.value = response.body()
@@ -44,6 +44,12 @@ class ForecastRepository() {
         })
         return forecast
     }
+
+    /**
+     * OBS: will later be called through a coroutine.
+     */
+    suspend fun getForecastResult2() = client.getForecast2()
+
 
 }
 

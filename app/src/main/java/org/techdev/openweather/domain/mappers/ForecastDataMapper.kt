@@ -1,7 +1,7 @@
 package org.techdev.openweather.domain.mappers
 
 import org.techdev.openweather.data.repository.Forecast
-import org.techdev.openweather.data.repository.ForecastResult
+import org.techdev.openweather.data.repository.ForecastResponse
 import org.techdev.openweather.domain.model.ForecastList
 import java.text.DateFormat
 import java.util.*
@@ -14,7 +14,7 @@ import org.techdev.openweather.domain.model.Forecast as ModelForecast
  */
 class ForecastDataMapper {
 
-    fun convertFromDataModel(forecast: ForecastResult) : ForecastList =
+    fun convertFromDataModel(forecast: ForecastResponse) : ForecastList =
         ForecastList(
             forecast.city.name,
             forecast.city.country,

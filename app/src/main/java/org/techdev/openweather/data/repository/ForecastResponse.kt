@@ -1,6 +1,6 @@
 package org.techdev.openweather.data.repository
 
-data class ForecastResult(val city: City, val list: List<Forecast>)
+data class ForecastResponse(val city: City, val list: List<Forecast>)
 
 data class City(
     val id: String,

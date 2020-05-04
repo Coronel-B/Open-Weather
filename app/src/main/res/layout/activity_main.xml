@@ -4,12 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_orange_dark"
     tools:context=".MainActivity">
 
     <FrameLayout
-        android:id="@+id/container"
+        android:id="@+id/weather_current_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:background="@android:color/black"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <FrameLayout
+        android:id="@+id/forecasts_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/weather_current_container"
+        app:layout_constraintBottom_toTopOf="@id/detail_weather_container"
+        app:layout_constraintHeight_percent="0.2"/>
+
+    <FrameLayout
+        android:id="@+id/detail_weather_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.6"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

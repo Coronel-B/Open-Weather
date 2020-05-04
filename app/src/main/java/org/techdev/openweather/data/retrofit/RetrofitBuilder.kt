@@ -12,8 +12,7 @@ object RetrofitBuilder {
         get() {
             if (_retrofitBuilder == null) {
                 _retrofitBuilder = Retrofit.Builder()
-//                    .baseUrl(BuildConfig.BASE_URL)    //TODO habilitar
-                    .baseUrl("https://samples.openweathermap.org/data/2.5/")
+                    .baseUrl(BuildConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
 //                    .addCallAdapterFactory(LiveDataCallAdapterFactory())
             }

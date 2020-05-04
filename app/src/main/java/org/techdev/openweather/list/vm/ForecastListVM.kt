@@ -1,45 +1,24 @@
 package org.techdev.openweather.list.vm
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.techdev.openweather.data.repository.ForecastRepository
+import org.techdev.openweather.data.repository.*
+import org.techdev.openweather.data.retrofit.service.*
+import org.techdev.openweather.domain.model.WeatherCurrent
+import org.techdev.openweather.util.ErrorType
+import org.techdev.openweather.util.OWViewModel
+import org.techdev.openweather.util.RemoteErrorEmitter
+import org.techdev.openweather.util.ScreenState
 
-class ForecastListVM : ViewModel() {
+class ForecastListVM : OWViewModel(),
+    RemoteErrorEmitter {
 
-    private val _progressVisiblity = MutableLiveData<Boolean>()
-    val progressVisiblity: LiveData<Boolean> get() = _progressVisiblity
-
-    private val forecastRepository = ForecastRepository()
-
-//    TODO:
     /*private val _forecastResult = MutableLiveData<ForecastResult>()
     val forecastResult: LiveData<ForecastResult> get() = _forecastResult*/
     private val _forecastResult = MutableLiveData<JsonObject>()
     val forecastResult: LiveData<JsonObject> get() = _forecastResult
-
-    fun getForecast() {
-
-//        Easy way to get off the main thread
-        viewModelScope.launch {
-            _progressVisiblity.value = true
-
-//            The result is recovered in a 2nd plane so as not to block the main thread
-            _forecastResult.value = withContext(Dispatchers.IO) {
-//                TODO: ForecastResult()
-//                ""
-                forecastRepository.getForecastString().value
-
-            }
-
-            _progressVisiblity.value = false
-        }
-    }
-
 
 }

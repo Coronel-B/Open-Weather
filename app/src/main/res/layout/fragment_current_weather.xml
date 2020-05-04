@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".list.ui.ForecastListFragment">
+    tools:context=".current.ui.WeatherCurrentFragment">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,23 +13,23 @@
         android:layout_margin="8dp"
         tools:layout_height="200dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+
+
+
 
         <ProgressBar
-            android:id="@+id/list_progress_bar"
+            android:id="@+id/weather_current_progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="gone"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </FrameLayout>
