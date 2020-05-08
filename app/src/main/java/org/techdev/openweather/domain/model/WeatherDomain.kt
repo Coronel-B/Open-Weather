@@ -1,13 +1,22 @@
 package org.techdev.openweather.domain.model
 
+import org.techdev.openweather.data.repository.CoordinatesResponse
+import org.techdev.openweather.data.repository.Main
+import org.techdev.openweather.data.repository.Wind
+
 data class WeatherCurrent(
     val id: Int,
-    val main: String,
+    val city: String,
+    val codeCountry: String,
+    val coordinates: CoordinatesResponse,
     val description: String,
-    val coord: Coordinates
+    val icon: String,
+    val temp: String
 )
 
-data class Coordinates(
-    val long: Long,
-    val lat: String
+data class WeatherCurrentDetail(
+    val weatherCurrent: WeatherCurrent,
+    val main: Main,
+    val wind: Wind
 )
+

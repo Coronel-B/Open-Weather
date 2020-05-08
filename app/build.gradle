@@ -13,6 +13,10 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField("String", "BASE_URL", "\"https://api.openweathermap.org/data/2.5/\"")
+        buildConfigField("String", "BASE_IMG_URL", "\"http://openweathermap.org/img/wn/\"")
+        buildConfigField("String", "APP_ID", "\"d6842bc2ee8ad484e20158713143979d\"")
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -20,8 +24,6 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", "\"https://api.openweathermap.org/data/2.5/\"")
-            buildConfigField("String", "APP_ID", "\"d6842bc2ee8ad484e20158713143979d\"")
         }
         release {
             minifyEnabled false
@@ -82,6 +84,8 @@ dependencies {
 //    Cardview
     implementation 'androidx.cardview:cardview:1.0.0'
 
+//      Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'

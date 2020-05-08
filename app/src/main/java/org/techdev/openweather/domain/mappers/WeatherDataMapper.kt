@@ -1,7 +1,6 @@
 package org.techdev.openweather.domain.mappers
 
 import org.techdev.openweather.data.repository.WeatherResponse
-import org.techdev.openweather.domain.model.Coordinates
 import org.techdev.openweather.domain.model.WeatherCurrent
 
 /**
@@ -15,12 +14,12 @@ class WeatherDataMapper {
     fun convertFromDataModelToDomain(response: WeatherResponse) : WeatherCurrent =
         WeatherCurrent(
             response.id,
-            response.weather[0].main,
+            response.city,
+            response.sys.country,
+            response.coord,
             response.weather[0].description,
-            Coordinates(
-                response.coord.long,
-                response.coord.lat
-            )
+            response.weather[0].icon,
+            response.main.temp
         )
 
 }

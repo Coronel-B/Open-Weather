@@ -5,18 +5,25 @@ import com.google.gson.annotations.SerializedName
 
 data class WeatherResponse(
     @SerializedName("id") @Expose val id: Int,
-    val name: String,
-    val cod: Int,
-    val coord: Coordinates2,
-    val weather: List<Weather2>,
-    val main: Main
+    @SerializedName("name") @Expose val city: String,
+    @SerializedName("cod") @Expose val codeStatus: Int,
+    val timezone: Int,
+    val coord: CoordinatesResponse,
+    val weather: List<WeatherItem>,
+    val base: String,
+    val main: Main,
+    val visibility: String,
+    val wind: Wind,
+    val clouds: Clouds,
+    val dt: Int,
+    val sys: Sys
 )
 
-data class Coordinates2(
+data class CoordinatesResponse(
     val long: Long,
     val lat: String)
 
-data class Weather2(
+data class WeatherItem(
     val id: Long,
     val main: String,
     val description: String,
@@ -29,4 +36,21 @@ data class Main(
     val temp_max: String,
     val pressure: String,
     val humidity: String
+)
+
+data class Wind(
+    val speed: Double,
+    val deg: Int
+)
+
+data class Clouds(
+    val all: Int
+)
+
+data class Sys(
+    val tpye: Int,
+    val id: Int,
+    val country: String,
+    val sunrise: Int,
+    val sunset: Int
 )

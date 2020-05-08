@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:background="@android:color/darker_gray"
     tools:context=".current.ui.WeatherCurrentFragment">
 
 
@@ -11,10 +12,98 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
-        tools:layout_height="200dp">
+        tools:layout_height="150dp">
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_image_current_weather"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
+            <ImageView
+                android:id="@+id/image_current_weather"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            
+            <ProgressBar
+                android:id="@+id/progress_bar_img_current_weather"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:visibility="visible"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
+        
 
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="48sp"
+            android:layout_marginLeft="32dp"
+            app:layout_constraintBottom_toBottomOf="@id/container_image_current_weather"
+            app:layout_constraintStart_toEndOf="@id/container_image_current_weather"
+            tools:text="24"/>
+
+        <TextView
+            android:id="@+id/measurement_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="°C"
+            android:textSize="24sp"
+            app:layout_constraintLeft_toRightOf="@id/temp"
+            app:layout_constraintTop_toTopOf="@id/temp"/>
+        
+        <TextView
+            android:id="@+id/location_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bosques, Buenos Aires"
+            android:textSize="24sp"
+            android:layout_margin="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        
+        <TextView
+            android:id="@+id/change_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/location_name"
+            tools:text="Cambiar ubicación"/>
+        
+        <TextView
+            android:id="@+id/day_of_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toEndOf="@id/measurement_unit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/change_location"
+            tools:text="Martes"/>
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toEndOf="@id/measurement_unit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/day_of_week"
+            tools:text="Despejado"/>
 
 
         <ProgressBar

@@ -11,7 +11,7 @@
         android:id="@+id/weather_current_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@android:color/black"
+        android:background="@android:color/white"
         app:layout_constraintHeight_percent="0.2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

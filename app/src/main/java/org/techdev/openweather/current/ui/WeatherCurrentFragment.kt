@@ -12,6 +12,7 @@ import androidx.lifecycle.get
 
 import org.techdev.openweather.current.vm.WeatherCurrentVM
 import org.techdev.openweather.databinding.FragmentCurrentWeatherBinding
+import org.techdev.openweather.domain.model.WeatherCurrent
 import org.techdev.openweather.util.ScreenState
 
 /**
@@ -38,8 +39,8 @@ class WeatherCurrentFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        setupObservers()
         getWeatherCurrent()
+        setupObservers()
     }
 
 
@@ -48,14 +49,26 @@ class WeatherCurrentFragment : Fragment() {
             binding.weatherCurrentProgressBar.visibility = if (it == ScreenState.LOADING) View.VISIBLE else View.GONE
         })
 
-        viewModel.weather.observe(this, Observer {
-            Log.d("TEST", it.toString())
+        viewModel.weather.observe(this, Observer { weather ->
+            Log.d("TEST", "" + weather?.toString())
 
+            bind(weather)
         })
+    }
+
+    fun bind(weather: WeatherCurrent) {
+//        binding.imageCurrentWeather
+
+//        celsius = (fahrenheit-32)*(0.5556);
+        binding.temp.text = weather.temp
+        binding.locationName.text = weather.city + ", "+ weather.codeCountry    //TODO: Tiene que ser la seleccionada por el usuario
+        binding.description.text = weather.description
+
     }
 
     private fun getWeatherCurrent() {
         viewModel.getWeatherCurrent()
     }
+
 
 }
