@@ -5,15 +5,20 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 
 import org.techdev.openweather.current.vm.WeatherCurrentVM
 import org.techdev.openweather.databinding.FragmentCurrentWeatherBinding
 import org.techdev.openweather.domain.model.WeatherCurrent
+import org.techdev.openweather.extensions.getIconUrl
+import org.techdev.openweather.extensions.loadFromUrl
 import org.techdev.openweather.util.ScreenState
+import java.time.DayOfWeek
 
 /**
  * A simple [Fragment] subclass.
@@ -57,13 +62,18 @@ class WeatherCurrentFragment : Fragment() {
     }
 
     fun bind(weather: WeatherCurrent) {
-//        binding.imageCurrentWeather
+        binding.imageCurrentWeather.loadFromUrl(
+            getIconUrl(weather.icon),
+            binding.imgCurrentWeatherProgressBar)
 
-//        celsius = (fahrenheit-32)*(0.5556);
-        binding.temp.text = weather.temp
+        binding.temp.text = viewModel.convertToDegreeCelcius(weather.temp.toDouble())
+        binding.measurementUnit.visibility = VISIBLE
+
         binding.locationName.text = weather.city + ", "+ weather.codeCountry    //TODO: Tiene que ser la seleccionada por el usuario
-        binding.description.text = weather.description
+        binding.changeLocation.visibility = VISIBLE
 
+        binding.dayOfWeek.text = viewModel.dayOfWeek()
+        binding.description.text = weather.description
     }
 
     private fun getWeatherCurrent() {
