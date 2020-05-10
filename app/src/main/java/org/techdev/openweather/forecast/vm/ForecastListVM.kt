@@ -1,17 +1,9 @@
-package org.techdev.openweather.list.vm
+package org.techdev.openweather.forecast.vm
 
 import androidx.lifecycle.*
 import com.google.gson.JsonObject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.techdev.openweather.data.repository.*
-import org.techdev.openweather.data.retrofit.service.*
-import org.techdev.openweather.domain.model.WeatherCurrent
-import org.techdev.openweather.util.ErrorType
 import org.techdev.openweather.util.OWViewModel
 import org.techdev.openweather.util.RemoteErrorEmitter
-import org.techdev.openweather.util.ScreenState
 
 class ForecastListVM : OWViewModel(),
     RemoteErrorEmitter {

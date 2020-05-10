@@ -3,7 +3,7 @@ package org.techdev.openweather
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import org.techdev.openweather.current.ui.WeatherCurrentFragment
-import org.techdev.openweather.list.ui.ForecastListFragment
+import org.techdev.openweather.forecast.ui.ForecastListFragment
 
 class MainActivity : AppCompatActivity() {
 

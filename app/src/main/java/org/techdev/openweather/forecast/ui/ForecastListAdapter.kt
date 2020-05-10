@@ -1,4 +1,4 @@
-package org.techdev.openweather.list.ui
+package org.techdev.openweather.forecast.ui
 
 import android.view.View
 import android.view.ViewGroup

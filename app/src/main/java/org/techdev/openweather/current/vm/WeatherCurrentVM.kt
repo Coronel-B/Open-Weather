@@ -1,29 +1,29 @@
 package org.techdev.openweather.current.vm
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.location.Location
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.launch
-import org.techdev.openweather.BuildConfig
+import org.techdev.openweather.current.ui.WeatherCurrentFragment
 import org.techdev.openweather.data.repository.WeatherRemoteRepository
 import org.techdev.openweather.data.repository.WeatherRepositoryImpl
 import org.techdev.openweather.data.retrofit.service.APICallManager
 import org.techdev.openweather.domain.model.WeatherCurrent
+import org.techdev.openweather.map.LocationMapsActivity
 import org.techdev.openweather.util.OWViewModel
 import org.techdev.openweather.util.RemoteErrorEmitter
 import org.techdev.openweather.util.ScreenState
 import java.math.RoundingMode
-import java.text.DateFormat
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.TextStyle
 import java.util.*
-import java.util.concurrent.TimeUnit
-import kotlin.math.truncate
-import kotlin.reflect.KProperty
 
 class WeatherCurrentVM : OWViewModel(),RemoteErrorEmitter {
 
@@ -32,6 +32,11 @@ class WeatherCurrentVM : OWViewModel(),RemoteErrorEmitter {
 
     private val _weahter = MutableLiveData<WeatherCurrent>()
     val weather: LiveData<WeatherCurrent> = _weahter
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val _currentLocation = MutableLiveData<Location>()
+    val currentLocation: LiveData<Location> = _currentLocation
+
 
     fun getWeatherCurrent() {
 //        Easy way to get off the main thread
@@ -73,12 +78,21 @@ class WeatherCurrentVM : OWViewModel(),RemoteErrorEmitter {
     }
 
     /**
-     * PRO: Describe una ubicacion desde Google Maps
+     * PRO: Inicia el fragmento del mapa.
+     * PRE: En el dispositivo Google Play Services está actualizado
      */
-    fun getLocationFromMaps(): String {
-
-        return "Palermo"
+    fun showOriginLocalityPickerScreen(context: Fragment) {
+        val requestIntent = Intent(context.activity, LocationMapsActivity::class.java)
+        requestIntent.action = LocationMapsActivity.ACTION_PICK_LOCATION
+        context.startActivityForResult(requestIntent, WeatherCurrentFragment.REQUEST_PICK_LOCATION)
     }
 
+    fun getFusedLocationProviderClient(activity: Activity) {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener {
+                _currentLocation.value = it
+            }
+    }
 
 }

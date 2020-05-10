@@ -1,21 +1,16 @@
-package org.techdev.openweather.list.ui
+package org.techdev.openweather.forecast.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import org.techdev.openweather.databinding.FragmentListForecastBinding
-import org.techdev.openweather.list.vm.ForecastListVM
-import org.techdev.openweather.util.ScreenState
+import org.techdev.openweather.forecast.vm.ForecastListVM
 
 /**
  * PRO: Render a list of daily forecasts for the next 5 days
