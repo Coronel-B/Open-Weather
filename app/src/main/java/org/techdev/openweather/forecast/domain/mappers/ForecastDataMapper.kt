@@ -1,12 +1,12 @@
-package org.techdev.openweather.domain.mappers
+package org.techdev.openweather.forecast.domain.mappers
 
-import org.techdev.openweather.data.repository.Forecast
-import org.techdev.openweather.data.repository.ForecastResponse
-import org.techdev.openweather.domain.model.ForecastList
+import org.techdev.openweather.forecast.data.repository.Forecast
+import org.techdev.openweather.forecast.data.repository.ForecastResponse
+import org.techdev.openweather.forecast.domain.model.ForecastList
 import java.text.DateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
-import org.techdev.openweather.domain.model.Forecast as ModelForecast
+import org.techdev.openweather.forecast.domain.model.Forecast as ModelForecast
 
 
 /**

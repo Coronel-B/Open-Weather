@@ -1,4 +1,4 @@
-package org.techdev.openweather.domain.model
+package org.techdev.openweather.forecast.domain.model
 
 data class ForecastList(
     val city: String,

@@ -1,9 +1,8 @@
-package org.techdev.openweather.map
+package org.techdev.openweather.map.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.google.android.gms.maps.GoogleMap
 import org.techdev.openweather.R
 
 class LocationMapsActivity : AppCompatActivity() {
@@ -25,7 +24,8 @@ class LocationMapsActivity : AppCompatActivity() {
             .findFragmentById(R.id.fragment_origin_locality_picker_map_container) as LocationPickerMapFragment?
 
         if (view == null) {
-            view = LocationPickerMapFragment.newInstance()
+            view =
+                LocationPickerMapFragment.newInstance()
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragment_origin_locality_picker_map_container, view)

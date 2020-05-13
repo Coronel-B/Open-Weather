@@ -11,15 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import org.techdev.openweather.databinding.FragmentListForecastBinding
 import org.techdev.openweather.forecast.vm.ForecastListVM
+import org.techdev.openweather.map.vm.GeolocationVM
 
 /**
  * PRO: Render a list of daily forecasts for the next 5 days
  */
-class ForecastListFragment : Fragment() {
+class ForecastListFragment(geolocationVM: GeolocationVM) : Fragment() {
 
     private lateinit var binding: FragmentListForecastBinding
 
-    private lateinit var viewModel: ForecastListVM
+    private lateinit var forecastVM: ForecastListVM
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +30,7 @@ class ForecastListFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentListForecastBinding.inflate(layoutInflater)
 
-        viewModel = ViewModelProvider(this).get()
+        forecastVM = ViewModelProvider(this).get()
 
         binding.listRecyclerView.layoutManager = LinearLayoutManager(context)
 

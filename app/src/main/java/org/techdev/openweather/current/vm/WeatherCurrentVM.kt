@@ -1,22 +1,17 @@
 package org.techdev.openweather.current.vm
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.location.Location
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.launch
 import org.techdev.openweather.current.ui.WeatherCurrentFragment
-import org.techdev.openweather.data.repository.WeatherRemoteRepository
-import org.techdev.openweather.data.repository.WeatherRepositoryImpl
+import org.techdev.openweather.current.data.repository.WeatherRemoteRepository
+import org.techdev.openweather.current.data.repository.WeatherRepositoryImpl
 import org.techdev.openweather.data.retrofit.service.APICallManager
-import org.techdev.openweather.domain.model.WeatherCurrent
-import org.techdev.openweather.map.LocationMapsActivity
+import org.techdev.openweather.current.domain.model.WeatherCurrent
+import org.techdev.openweather.map.ui.LocationMapsActivity
 import org.techdev.openweather.util.OWViewModel
 import org.techdev.openweather.util.RemoteErrorEmitter
 import org.techdev.openweather.util.ScreenState
@@ -27,16 +22,17 @@ import java.util.*
 
 class WeatherCurrentVM : OWViewModel(),RemoteErrorEmitter {
 
-    private val weatherRemoteRepository= WeatherRemoteRepository(APICallManager())
-    private val weatherRepositoryImpl = WeatherRepositoryImpl(weatherRemoteRepository)
+    private val weatherRemoteRepository=
+        WeatherRemoteRepository(
+            APICallManager()
+        )
+    private val weatherRepositoryImpl =
+        WeatherRepositoryImpl(
+            weatherRemoteRepository
+        )
 
     private val _weahter = MutableLiveData<WeatherCurrent>()
     val weather: LiveData<WeatherCurrent> = _weahter
-
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val _currentLocation = MutableLiveData<Location>()
-    val currentLocation: LiveData<Location> = _currentLocation
-
 
     fun getWeatherCurrent() {
 //        Easy way to get off the main thread
@@ -85,14 +81,6 @@ class WeatherCurrentVM : OWViewModel(),RemoteErrorEmitter {
         val requestIntent = Intent(context.activity, LocationMapsActivity::class.java)
         requestIntent.action = LocationMapsActivity.ACTION_PICK_LOCATION
         context.startActivityForResult(requestIntent, WeatherCurrentFragment.REQUEST_PICK_LOCATION)
-    }
-
-    fun getFusedLocationProviderClient(activity: Activity) {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener {
-                _currentLocation.value = it
-            }
     }
 
 }

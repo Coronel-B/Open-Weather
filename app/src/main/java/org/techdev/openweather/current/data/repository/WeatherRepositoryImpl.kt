@@ -1,15 +1,16 @@
-package org.techdev.openweather.data.repository
+package org.techdev.openweather.current.data.repository
 
 import org.techdev.openweather.util.RemoteErrorEmitter
-import org.techdev.openweather.domain.mappers.WeatherDataMapper
-import org.techdev.openweather.domain.model.WeatherCurrent
+import org.techdev.openweather.current.domain.mappers.WeatherDataMapper
+import org.techdev.openweather.current.domain.model.WeatherCurrent
 
 class WeatherRepositoryImpl(private val remoteRepository: WeatherRepository.RemoteRepository
-) : WeatherRepository{
+) : WeatherRepository {
 
     override suspend fun getWeather(remoteErrorEmitter: RemoteErrorEmitter) : WeatherCurrent? {
         val response = remoteRepository.getWeather(remoteErrorEmitter)
-        val mapper = WeatherDataMapper()
+        val mapper =
+            WeatherDataMapper()
         return response?.let {
             mapper.convertFromDataModelToDomain(it)
         }

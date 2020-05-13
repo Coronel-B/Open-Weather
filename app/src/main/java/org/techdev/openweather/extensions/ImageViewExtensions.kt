@@ -5,6 +5,7 @@ import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.ProgressBar
 import com.bumptech.glide.Glide
+import com.bumptech.glide.annotation.GlideModule
 
 fun ImageView.loadFromUrl(url: String, progressBar: ProgressBar) {
     progressBar.visibility = VISIBLE

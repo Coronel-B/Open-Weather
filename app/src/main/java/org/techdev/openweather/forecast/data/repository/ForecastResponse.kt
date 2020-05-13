@@ -1,17 +1,15 @@
-package org.techdev.openweather.data.repository
+package org.techdev.openweather.forecast.data.repository
+
+import com.google.android.gms.maps.model.LatLng
 
 data class ForecastResponse(val city: City, val list: List<Forecast>)
 
 data class City(
     val id: String,
     val name: String,
-    val coordinates: Coordinates,
+    val latLng: LatLng,
     val country: String,
     val population: Int)
-
-data class Coordinates(
-    val long: Long,
-    val lat: String)
 
 data class Forecast(
     val dt: Long,

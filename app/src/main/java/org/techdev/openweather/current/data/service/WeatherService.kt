@@ -1,6 +1,6 @@
-package org.techdev.openweather.data.retrofit.service
+package org.techdev.openweather.current.data.service
 
-import org.techdev.openweather.data.repository.WeatherResponse
+import org.techdev.openweather.current.data.repository.WeatherResponse
 import retrofit2.http.GET
 
 interface WeatherService {

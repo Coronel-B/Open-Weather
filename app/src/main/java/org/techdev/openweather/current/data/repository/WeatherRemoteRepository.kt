@@ -1,11 +1,12 @@
-package org.techdev.openweather.data.repository
+package org.techdev.openweather.current.data.repository
 
 import org.techdev.openweather.data.retrofit.RetrofitService
 import org.techdev.openweather.data.retrofit.service.APICallManager
 import org.techdev.openweather.util.RemoteErrorEmitter
-import org.techdev.openweather.data.retrofit.service.WeatherService
+import org.techdev.openweather.current.data.service.WeatherService
 
-class WeatherRemoteRepository(private val apiCallManager: APICallManager) : WeatherRepository.RemoteRepository {
+class WeatherRemoteRepository(private val apiCallManager: APICallManager) :
+    WeatherRepository.RemoteRepository {
 
     var client = RetrofitService.createService(WeatherService::class.java)
 

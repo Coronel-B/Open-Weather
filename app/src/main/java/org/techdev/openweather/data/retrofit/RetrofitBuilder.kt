@@ -14,7 +14,6 @@ object RetrofitBuilder {
                 _retrofitBuilder = Retrofit.Builder()
                     .baseUrl(BuildConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
-//                    .addCallAdapterFactory(LiveDataCallAdapterFactory())
             }
             return _retrofitBuilder!!
         }

@@ -1,4 +1,4 @@
-package org.techdev.openweather.map
+package org.techdev.openweather.map.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -51,7 +51,8 @@ class LocationPickerMapFragment : SupportMapFragment(),
     private var locationManager: LocationManager? = null
 
     companion object {
-        fun newInstance() = LocationPickerMapFragment()
+        fun newInstance() =
+            LocationPickerMapFragment()
     }
 
     /**

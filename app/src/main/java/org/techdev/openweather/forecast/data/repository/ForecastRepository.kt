@@ -1,10 +1,10 @@
-package org.techdev.openweather.data.repository
+package org.techdev.openweather.forecast.data.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.JsonObject
 import org.techdev.openweather.data.retrofit.RetrofitService
-import org.techdev.openweather.data.retrofit.service.ForecastService
+import org.techdev.openweather.forecast.data.service.ForecastService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,7 +14,8 @@ class ForecastRepository {
 
 //    private val forecastService: ForecastService = TODO()
 
-    private var client: ForecastService = RetrofitService.createService(ForecastService::class.java)
+    private var client: ForecastService = RetrofitService.createService(
+        ForecastService::class.java)
 
 
     /*fun getForecastResult(): MutableLiveData<ForecastResult> {

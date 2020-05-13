@@ -1,6 +1,7 @@
 package org.techdev.openweather.data.retrofit.service
 
 import org.techdev.openweather.data.retrofit.RetrofitService
+import org.techdev.openweather.forecast.data.service.ForecastService
 
 class ForecastRequest(private val zipCode: String) {
 

@@ -1,4 +1,4 @@
-package org.techdev.openweather.data.repository
+package org.techdev.openweather.current.data.repository
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
