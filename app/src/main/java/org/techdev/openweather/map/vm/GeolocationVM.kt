@@ -36,6 +36,8 @@ class GeolocationVM(val context: Context) : OWViewModel() {
 
                 if (location != null) {
                     setCurrentFusedLocation(Geolocation(LatLng(location.latitude, location.longitude)))
+
+//                    Ubicación definida cuando se denega el permiso
                 } else {
                     setCurrentFusedLocation(Geolocation(LatLng(-30.0, -60.0)))
                 }

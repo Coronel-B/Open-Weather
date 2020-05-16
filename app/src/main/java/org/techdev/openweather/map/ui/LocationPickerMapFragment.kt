@@ -13,6 +13,7 @@ import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -162,7 +163,7 @@ class LocationPickerMapFragment : SupportMapFragment(),
             2000,
             object : CancelableCallback {
                 override fun onFinish() {
-                    Toast.makeText(context, "Buenos Aires", Toast.LENGTH_LONG).show()
+                    Log.d("TEST", "Buenos Aires")
                 }
 
                 override fun onCancel() {}

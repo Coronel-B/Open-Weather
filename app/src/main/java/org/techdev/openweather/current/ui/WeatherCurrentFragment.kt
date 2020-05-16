@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
-import com.google.android.gms.maps.model.LatLng
 import org.techdev.openweather.current.vm.WeatherCurrentVM
 import org.techdev.openweather.databinding.FragmentCurrentWeatherBinding
 import org.techdev.openweather.current.domain.model.WeatherCurrent
@@ -41,6 +40,7 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
         if (!checkLocationPermission()) {
             requestLocationPermission()
         }
+
         if (!checkLocationProviderEnabled()) {
             requestEnableLocationProvider()
         }
@@ -97,6 +97,8 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
     }
 
     private fun bindWeatherCurrent(weather: WeatherCurrent) {
+        binding.fragmentCurrentWeatherInnerContainer.visibility = VISIBLE
+
         binding.imageCurrentWeather.loadFromUrl(
             getIconUrl(weather.icon),
             binding.imgCurrentWeatherProgressBar)
@@ -135,20 +137,20 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         Log.d("TEST", "onPermissionsGranted")
+        updateCurrentFusedLocation()
+    }
+
+    private fun updateCurrentFusedLocation() {
         if (checkLocationPermission() && checkLocationProviderEnabled()) {
             geolocationVM.updateCurrentFusedLocation()
         }
     }
 
+//
     /**
-     * PRO: Si se denega el permiso de ubicación se inicializa un hardcodeo
+     * OBS: Si se denega se define una ubicación actual random en GeolocationVM
      */
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        Log.d("TEST", "onPermissionsDenied")
-        if (!checkLocationPermission() || !checkLocationProviderEnabled()) {
-            geolocationVM.setCurrentFusedLocation(Geolocation(LatLng(-30.0, -60.0)))
-        }
-    }
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {}
 
     companion object {
         //    Identifica la petición hacia el contexto (fragmento) del mapa

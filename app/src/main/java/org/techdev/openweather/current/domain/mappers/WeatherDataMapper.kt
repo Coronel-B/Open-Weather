@@ -17,7 +17,6 @@ class WeatherDataMapper {
         WeatherCurrent(
             response.id,
             response.city,
-            response.sys.country,
             Geolocation(LatLng(
                 response.coord.lat.toDouble(),
                 response.coord.long.toDouble())),
