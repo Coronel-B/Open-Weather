@@ -6,17 +6,13 @@ import android.app.Activity
 import android.app.AlertDialog.Builder
 import android.content.Context
 import android.content.Intent
-import android.location.Geocoder
 import android.location.GnssStatus.Callback
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.provider.Settings
-import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -25,10 +21,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import org.techdev.openweather.R
+import org.techdev.openweather.map.domain.Geolocation
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.EasyPermissions.PermissionCallbacks
-import java.io.IOException
-import java.util.*
 
 /**
  * OBS:
@@ -270,11 +265,9 @@ class LocationPickerMapFragment : SupportMapFragment(),
         //        Comparo que la acción del intent entrante del contexto sea de selección
         if (LocationMapsActivity.ACTION_PICK_LOCATION == activity!!.intent.action
         ) { //            Llamada al Geocoder en la UI del mapa
-            getAddressFromLocation(
+            sendGeolocationToHomeSecren(
                 latLng.latitude,
-                latLng.longitude,
-                activity,
-                GeocoderHandler()
+                latLng.longitude
             )
         }
     }
@@ -289,22 +282,20 @@ class LocationPickerMapFragment : SupportMapFragment(),
         if (LocationMapsActivity.ACTION_PICK_LOCATION
                 .equals(activity!!.intent.action)
         ) { //            Llamada al Geocoder en la UI del mapa
-            getAddressFromLocation(
+            sendGeolocationToHomeSecren(
                 location.latitude,
-                location.longitude,
-                activity,
-                GeocoderHandler()
+                location.longitude
             )
         }
     }
 
     /**
-     * PRO: Simplifica la creación de un intent de respuesta con el extra de la localidad
+     * PRO: Simplifica la creación de un intent de respuesta con el extra de la geolocalización
      *
      */
-    fun showAddEditUserProfileScreen(selectedLocation: String?) {
+    private fun showHomeScreen(selectedLocation: Geolocation) {
         val responseIntent = Intent()
-        responseIntent.putExtra(LocationMapsActivity.EXTRA_LOCATION, selectedLocation ?: "")
+        responseIntent.putExtra(LocationMapsActivity.EXTRA_LOCATION, selectedLocation)
         activity!!.setResult(Activity.RESULT_OK, responseIntent)
         activity!!.finish()
     }
@@ -314,64 +305,9 @@ class LocationPickerMapFragment : SupportMapFragment(),
      * OBS: Este procedimiento puede estar ubicado en una clase auxiliar.
      * Se usa un thread y un hanlder p/dicho propósito.
      */
-    private fun getAddressFromLocation(
-        latitude: Double, longitude: Double, context: Context?, handler: Handler?
-    ) {
-        val thread: Thread = object : Thread() {
-            override fun run() {
-                val geocoder = Geocoder(context, Locale.getDefault())
-                var result: String? = null
-                try {
-                    val addressList = geocoder.getFromLocation(
-                        latitude, longitude, 1
-                    )
-                    if (addressList != null && addressList.size > 0) {
-                        val address = addressList[0]
-                        //                        Devuelvo la primera linea de dirección y la localidad
-                        result = address.locality
-                    }
-                } catch (e: IOException) {
-                    Log.e("TAG", "Impossible to connect to Geocoder", e)
-                    e.printStackTrace()
-                } finally {
-                    val message = Message.obtain()
-                    message.target = handler
-                    if (result != null) {
-                        message.what = 1
-                        val bundle = Bundle()
-                        bundle.putString("address", result)
-                        message.data = bundle
-                    } else {
-                        message.what = 0
-                    }
-                    message.sendToTarget()
-                }
-            }
-        }
-        thread.start()
-    }
-
-    /**
-     * PRO: Almacena la ubicación seleccionada
-     */
-    @SuppressLint("HandlerLeak")
-    inner class GeocoderHandler : Handler() {
-        override fun handleMessage(msg: Message) {
-            val selectedLocation: String?
-            selectedLocation = when (msg.what) {
-                1 -> {
-                    val bundle = msg.data
-                    bundle.getString("address")
-                }
-                else -> null
-            }
-            //            Reemplazar por lo que se necesite hacer
-            try {
-                showAddEditUserProfileScreen(selectedLocation)
-            } catch (e: NullPointerException) {
-                Log.d(TAG, "La ubicación seleccionada es nula")
-            }
-        }
+    private fun sendGeolocationToHomeSecren(latitude: Double, longitude: Double) {
+        val geolocation = Geolocation(LatLng(latitude, longitude))
+        showHomeScreen(geolocation)
     }
 
 

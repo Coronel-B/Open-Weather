@@ -2,13 +2,14 @@ package org.techdev.openweather.current.data.repository
 
 import org.techdev.openweather.util.RemoteErrorEmitter
 import org.techdev.openweather.current.domain.model.WeatherCurrent
+import org.techdev.openweather.map.domain.Geolocation
 
 interface WeatherRepository {
 
-    suspend fun getWeather(remoteErrorEmitter: RemoteErrorEmitter) : WeatherCurrent?
+    suspend fun getWeather(remoteErrorEmitter: RemoteErrorEmitter, geolocation: Geolocation) : WeatherCurrent?
 
     interface RemoteRepository {
-        suspend fun getWeather(remoteErrorEmitter: RemoteErrorEmitter) : WeatherResponse?
+        suspend fun getWeather(remoteErrorEmitter: RemoteErrorEmitter, geolocation: Geolocation) : WeatherResponse?
     }
 
 }

@@ -11,6 +11,7 @@ import org.techdev.openweather.current.data.repository.WeatherRemoteRepository
 import org.techdev.openweather.current.data.repository.WeatherRepositoryImpl
 import org.techdev.openweather.data.retrofit.service.APICallManager
 import org.techdev.openweather.current.domain.model.WeatherCurrent
+import org.techdev.openweather.map.domain.Geolocation
 import org.techdev.openweather.map.ui.LocationMapsActivity
 import org.techdev.openweather.util.OWViewModel
 import org.techdev.openweather.util.RemoteErrorEmitter
@@ -34,12 +35,15 @@ class WeatherCurrentVM : OWViewModel(),RemoteErrorEmitter {
     private val _weahter = MutableLiveData<WeatherCurrent>()
     val weather: LiveData<WeatherCurrent> = _weahter
 
-    fun getWeatherCurrent() {
+    private val _geolocationPicked = MutableLiveData<Geolocation?>()
+    val geolocationPicked: LiveData<Geolocation?> = _geolocationPicked
+
+    fun getWeatherCurrent(geolocation: Geolocation) {
 //        Easy way to get off the main thread
         viewModelScope.launch {
             mutableScreenState.postValue(ScreenState.LOADING)
 
-            val weather = weatherRepositoryImpl.getWeather(this@WeatherCurrentVM)
+            val weather = weatherRepositoryImpl.getWeather(this@WeatherCurrentVM, geolocation)
             _weahter.postValue(weather)
 
             val newState = if (weather == null) ScreenState.ERROR else ScreenState.RENDER
@@ -81,6 +85,10 @@ class WeatherCurrentVM : OWViewModel(),RemoteErrorEmitter {
         val requestIntent = Intent(context.activity, LocationMapsActivity::class.java)
         requestIntent.action = LocationMapsActivity.ACTION_PICK_LOCATION
         context.startActivityForResult(requestIntent, WeatherCurrentFragment.REQUEST_PICK_LOCATION)
+    }
+
+    fun setGeolocationPicked(geolocation: Geolocation?) {
+        _geolocationPicked.value = geolocation
     }
 
 }

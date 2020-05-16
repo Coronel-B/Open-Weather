@@ -1,16 +1,14 @@
 package org.techdev.openweather.map.vm
 
-import android.Manifest
-import android.app.Activity
 import android.content.Context
+import android.location.Location
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
+import org.techdev.openweather.map.domain.Geolocation
 import org.techdev.openweather.util.OWViewModel
-import pub.devrel.easypermissions.EasyPermissions
 
 /**
  * PRE: El permiso de ubicación está habilitado
@@ -19,24 +17,28 @@ class GeolocationVM(val context: Context) : OWViewModel() {
 
     private var fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
-    private val _currentLatLngLocation = MutableLiveData<LatLng>()
+    private val _currentFusedLocation = MutableLiveData<Geolocation>()
 
-    val currentLatLngLocation: LiveData<LatLng> = _currentLatLngLocation
+    val currentFusedLocation: LiveData<Geolocation> = _currentFusedLocation
 
     init {
         Log.d("TEST", "@Singleton LocationVM")
-        getCurrentLocation()
+        getCurrentFusedLocation()
     }
 
     /**
      * PRE: El permiso de ubicación está habilitado
      */
-    private fun getCurrentLocation() {
-        Log.d("TEST", "Geolocation before")
+    private fun getCurrentFusedLocation() {
         fusedLocationClient.lastLocation
-            .addOnSuccessListener {
-                _currentLatLngLocation.value = LatLng(it.latitude, it.longitude)
-                Log.d("TEST", LatLng(it.latitude, it.longitude).toString())
+            .addOnSuccessListener { location: Location? ->
+                Log.d("TEST", location.toString())
+
+                if (location != null) {
+                    setCurrentFusedLocation(Geolocation(LatLng(location.latitude, location.longitude)))
+                } else {
+                    setCurrentFusedLocation(Geolocation(LatLng(-30.0, -60.0)))
+                }
             }
     }
 
@@ -45,12 +47,12 @@ class GeolocationVM(val context: Context) : OWViewModel() {
      * PRE: El permiso de ubicación está habilitado
      * OBS: Caso de uso: Cada vez que se habilite el permiso de ubicación
      */
-    fun updateCurrentLocation() {
-        getCurrentLocation()
+    fun updateCurrentFusedLocation() {
+        getCurrentFusedLocation()
     }
 
-    fun setCurrentLocation(newLatLngLocation: LatLng) {
-        _currentLatLngLocation.value = newLatLngLocation
+    fun setCurrentFusedLocation(newLatLngLocation: Geolocation) {
+        _currentFusedLocation.value = newLatLngLocation
     }
 
 }

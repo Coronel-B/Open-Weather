@@ -1,6 +1,7 @@
 package org.techdev.openweather.current.ui
 
 import android.app.Activity
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import org.techdev.openweather.current.vm.WeatherCurrentVM
 import org.techdev.openweather.databinding.FragmentCurrentWeatherBinding
 import org.techdev.openweather.current.domain.model.WeatherCurrent
 import org.techdev.openweather.extensions.*
+import org.techdev.openweather.map.domain.Geolocation
 import org.techdev.openweather.map.ui.LocationMapsActivity
 import org.techdev.openweather.map.vm.GeolocationVM
 import org.techdev.openweather.util.ScreenState
@@ -32,7 +34,7 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
 
     private lateinit var weatherVM: WeatherCurrentVM
 
-    private var originLocalityPicked: String? = null
+    private var geolocationPicked: Geolocation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +52,7 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        // Forward results to EasyPermissions
+//          Forward results to EasyPermissions
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
@@ -69,35 +71,38 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        getWeatherCurrent()
         setupObservers()
     }
 
 
     private fun setupObservers() {
-        weatherVM.mutableScreenState.observe(this, Observer {
+        weatherVM.mutableScreenState.observe(viewLifecycleOwner, Observer {
             binding.weatherCurrentProgressBar.visibility = if (it == ScreenState.LOADING) View.VISIBLE else View.GONE
         })
 
+//        Cuando no hay ninguna ubicación seleccionada
+        geolocationVM.currentFusedLocation.observe(viewLifecycleOwner, Observer { geolocation: Geolocation ->
+//            TODO: Tirar el request para obtener el clima solo cuando se inicia la app y cada vez que no llega algo en la seleccion del mapa
+            getWeatherCurrent(geolocation)
+        })
 
-        weatherVM.weather.observe(this, Observer { weather ->
+        weatherVM.geolocationPicked.observe(viewLifecycleOwner, Observer { geolocation: Geolocation? ->
+            geolocation?.let { getWeatherCurrent(it) }
+        })
+
+        weatherVM.weather.observe(viewLifecycleOwner, Observer { weather ->
             Log.d("TEST", "" + weather?.toString())
             bindWeatherCurrent(weather)
         })
-
-        geolocationVM.currentLatLngLocation.observe(this, Observer {
-            Log.d("TEST", "1: $it")
-//            TODO: Tirar el request para obtener el clima solo cuando se inicia la app y cada vez que no llega algo en la seleccion del mapa
-            binding.locationName.text = "Palermo"
-            binding.changeLocation.visibility = VISIBLE
-        })
-
     }
 
-    fun bindWeatherCurrent(weather: WeatherCurrent) {
+    private fun bindWeatherCurrent(weather: WeatherCurrent) {
         binding.imageCurrentWeather.loadFromUrl(
             getIconUrl(weather.icon),
             binding.imgCurrentWeatherProgressBar)
+
+        binding.locationName.text = weather.city
+        binding.changeLocation.visibility = VISIBLE
 
         binding.temp.text = weatherVM.convertToDegreeCelcius(weather.temp.toDouble())
         binding.measurementUnit.visibility = VISIBLE
@@ -110,8 +115,8 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
         }
     }
 
-    private fun getWeatherCurrent() {
-        weatherVM.getWeatherCurrent()
+    private fun getWeatherCurrent(geolocation: Geolocation) {
+        weatherVM.getWeatherCurrent(geolocation)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -120,11 +125,8 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
         when(requestCode) {
             REQUEST_PICK_LOCATION -> {
                 if (resultCode == Activity.RESULT_OK && ::binding.isInitialized) {
-                    originLocalityPicked =
-                        data!!.getStringExtra(LocationMapsActivity.EXTRA_LOCATION)
-//                    TODO: Hay que guardar las coordenadas, no el nombre
-                    binding.locationName.text = originLocalityPicked        //TODO: Concatenar el codigo de pais de la nueva ubicacion
-//                    TODO: Cambiar el clima en base a la nueva ubicacion
+                    geolocationPicked = data?.getParcelableExtra(LocationMapsActivity.EXTRA_LOCATION)
+                    weatherVM.setGeolocationPicked(geolocationPicked)
                 }
                 return
             }
@@ -134,7 +136,7 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         Log.d("TEST", "onPermissionsGranted")
         if (checkLocationPermission() && checkLocationProviderEnabled()) {
-            geolocationVM.updateCurrentLocation()
+            geolocationVM.updateCurrentFusedLocation()
         }
     }
 
@@ -144,7 +146,7 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
         Log.d("TEST", "onPermissionsDenied")
         if (!checkLocationPermission() || !checkLocationProviderEnabled()) {
-            geolocationVM.setCurrentLocation(LatLng(-30.0, -60.0))
+            geolocationVM.setCurrentFusedLocation(Geolocation(LatLng(-30.0, -60.0)))
         }
     }
 

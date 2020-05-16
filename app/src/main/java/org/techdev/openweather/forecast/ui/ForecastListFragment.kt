@@ -46,11 +46,11 @@ class ForecastListFragment(geolocationVM: GeolocationVM) : Fragment() {
 
 /*
     private fun setupObservers() {
-        viewModel.mutableScreenState.observe(this, Observer {
+        viewModel.mutableScreenState.observe(viewLifecycleOwner, Observer {
             binding.listProgressBar.visibility = if (it == ScreenState.LOADING) VISIBLE else GONE
         })
 
-        viewModel.forecasts.observe(this, Observer {
+        viewModel.forecasts.observe(viewLifecycleOwner, Observer {
             Log.d("TEST", it.toString())
 
             //            TODO: Set Adapter
