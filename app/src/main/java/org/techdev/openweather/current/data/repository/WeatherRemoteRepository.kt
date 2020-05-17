@@ -9,11 +9,11 @@ import org.techdev.openweather.map.domain.Geolocation
 class WeatherRemoteRepository(private val apiCallManager: APICallManager) :
     WeatherRepository.RemoteRepository {
 
-    var client = RetrofitService.createService(WeatherService::class.java)
+    private val weatherService = RetrofitService.createService(WeatherService::class.java)
 
     override suspend fun getWeather(remoteErrorEmitter: RemoteErrorEmitter, geolocation: Geolocation): WeatherResponse? {
         return apiCallManager.executeSafeApiCall(remoteErrorEmitter) {
-            client.getWeather(
+            weatherService.getWeather(
                 latitude = geolocation.geolocation.latitude.toString(),
                 longitude = geolocation.geolocation.longitude.toString())
         }

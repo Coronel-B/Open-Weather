@@ -5,8 +5,8 @@ import org.techdev.openweather.current.domain.mappers.WeatherDataMapper
 import org.techdev.openweather.current.domain.model.WeatherCurrent
 import org.techdev.openweather.map.domain.Geolocation
 
-class WeatherRepositoryImpl(private val remoteRepository: WeatherRepository.RemoteRepository
-) : WeatherRepository {
+class WeatherRepositoryImpl(private val remoteRepository: WeatherRepository.RemoteRepository) :
+    WeatherRepository {
 
     override suspend fun getWeather(remoteErrorEmitter: RemoteErrorEmitter, geolocation: Geolocation) : WeatherCurrent? {
         val response = remoteRepository.getWeather(remoteErrorEmitter, geolocation)

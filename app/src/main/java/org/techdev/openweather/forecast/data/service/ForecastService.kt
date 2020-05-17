@@ -1,25 +1,26 @@
 package org.techdev.openweather.forecast.data.service
 
 import com.google.gson.JsonObject
+import org.techdev.openweather.BuildConfig
 import org.techdev.openweather.current.data.repository.WeatherResponse
+import org.techdev.openweather.forecast.data.repository.ForecastResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ForecastService {
 
-    @GET("forecast?q=M%C3%BCnchen,DE&appid=439d4b804bc8187953eb36d2a8c26a02")
-    fun getForecast(
-    ) : Call<JsonObject>
-//    ) : MutableLiveData<String>
-//    fun getForecast() : MutableLiveData<ForecastResult>
-
-    @GET("weather?appid=d6842bc2ee8ad484e20158713143979d&id=3430234")
-    suspend fun getForecast2(
-    ) : Call<WeatherResponse>
-
-    @GET("weather?appid=d6842bc2ee8ad484e20158713143979d&id=3430234")
-    suspend fun getForecast3(
-    ) : WeatherResponse
+    /**
+     * OBS: count = 40 is default
+     * @param count [1, 40]: 5d / 3h
+     */
+    @GET("forecast")
+    suspend fun getForecasts(
+        @Query("appid") appid: String = BuildConfig.APP_ID,
+        @Query("cnt") count: Int = 40,
+        @Query("lat") latitude: String,
+        @Query("lon") longitude: String
+    ) : ForecastResponse
 
 }
 

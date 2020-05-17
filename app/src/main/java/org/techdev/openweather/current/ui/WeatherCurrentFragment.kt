@@ -23,9 +23,6 @@ import org.techdev.openweather.map.vm.GeolocationVM
 import org.techdev.openweather.util.ScreenState
 import pub.devrel.easypermissions.EasyPermissions
 
-/**
- * A simple [Fragment] subclass.
- */
 class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragment(),
     EasyPermissions.PermissionCallbacks {
 

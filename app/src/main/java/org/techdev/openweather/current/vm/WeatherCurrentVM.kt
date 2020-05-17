@@ -23,14 +23,8 @@ import java.util.*
 
 class WeatherCurrentVM : OWViewModel(), RemoteErrorEmitter {
 
-    private val weatherRemoteRepository=
-        WeatherRemoteRepository(
-            APICallManager()
-        )
-    private val weatherRepositoryImpl =
-        WeatherRepositoryImpl(
-            weatherRemoteRepository
-        )
+    private val weatherRemoteRepository = WeatherRemoteRepository(APICallManager())
+    private val weatherRepositoryImpl = WeatherRepositoryImpl(weatherRemoteRepository)
 
     private val _weahter = MutableLiveData<WeatherCurrent>()
     val weather: LiveData<WeatherCurrent> = _weahter

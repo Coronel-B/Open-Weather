@@ -2,6 +2,8 @@
 
 API: https://openweathermap.org/forecast5
 
+IMPORTANT: Before running this project change your API KEY in **build.gradle (:app)**
+
  . Clean architecture
  . MVVM
  . ViewBinding
