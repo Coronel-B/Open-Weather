@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
     private fun locationViewModelProvider(): GeolocationVM {
         if (_geolocationVM == null) {
             _geolocationVM = GeolocationVM(this)
-            Log.d("TEST", "MainActivity")
         }
         return _geolocationVM!!
     }

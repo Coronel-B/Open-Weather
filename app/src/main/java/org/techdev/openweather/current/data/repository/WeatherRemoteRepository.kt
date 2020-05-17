@@ -13,7 +13,7 @@ class WeatherRemoteRepository(private val apiCallManager: APICallManager) :
 
     override suspend fun getWeather(remoteErrorEmitter: RemoteErrorEmitter, geolocation: Geolocation): WeatherResponse? {
         return apiCallManager.executeSafeApiCall(remoteErrorEmitter) {
-            client.getWeather2(
+            client.getWeather(
                 latitude = geolocation.geolocation.latitude.toString(),
                 longitude = geolocation.geolocation.longitude.toString())
         }

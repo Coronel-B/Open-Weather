@@ -21,7 +21,7 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class WeatherCurrentVM : OWViewModel(),RemoteErrorEmitter {
+class WeatherCurrentVM : OWViewModel(), RemoteErrorEmitter {
 
     private val weatherRemoteRepository=
         WeatherRemoteRepository(

@@ -47,6 +47,13 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
+    /**
+     * Source: https://stackoverflow.com/a/47509465/5279996
+     */
+    packagingOptions {
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
 
 }
 
@@ -64,7 +71,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
 //    Coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines")
 
 //    KTK extensions for each corresponding architecture components
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_runtime"
@@ -97,7 +104,12 @@ dependencies {
 //    EasyPermissions
     implementation "pub.devrel:easypermissions:3.0.0"
 
+
+//    ----- Testing -----
     testImplementation 'junit:junit:4.12'
+    testImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
 }

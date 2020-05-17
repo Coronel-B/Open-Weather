@@ -22,7 +22,7 @@ class GeolocationVM(val context: Context) : OWViewModel() {
     val currentFusedLocation: LiveData<Geolocation> = _currentFusedLocation
 
     init {
-        Log.d("TEST", "@Singleton LocationVM")
+        Log.d("GeolocationVM", "@Singleton LocationVM")
         getCurrentFusedLocation()
     }
 
@@ -32,8 +32,6 @@ class GeolocationVM(val context: Context) : OWViewModel() {
     private fun getCurrentFusedLocation() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                Log.d("TEST", location.toString())
-
                 if (location != null) {
                     setCurrentFusedLocation(Geolocation(LatLng(location.latitude, location.longitude)))
 

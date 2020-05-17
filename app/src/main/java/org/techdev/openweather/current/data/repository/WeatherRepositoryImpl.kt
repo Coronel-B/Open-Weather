@@ -10,8 +10,7 @@ class WeatherRepositoryImpl(private val remoteRepository: WeatherRepository.Remo
 
     override suspend fun getWeather(remoteErrorEmitter: RemoteErrorEmitter, geolocation: Geolocation) : WeatherCurrent? {
         val response = remoteRepository.getWeather(remoteErrorEmitter, geolocation)
-        val mapper =
-            WeatherDataMapper()
+        val mapper = WeatherDataMapper()
         return response?.let {
             mapper.convertFromDataModelToDomain(it)
         }

@@ -2,7 +2,6 @@ package org.techdev.openweather.data.retrofit
 
 object RetrofitService {
 
-
     /**
      * PRO: Read result of response
      */
@@ -15,6 +14,5 @@ object RetrofitService {
             .create(originalService)
 
     }
-
 
 }
