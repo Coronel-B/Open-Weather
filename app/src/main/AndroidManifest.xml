@@ -31,9 +31,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <!-- NoActionBar avoid interference with your custom toolbar-->
         <activity
             android:name=".map.ui.LocationMapsActivity"
-            android:label="@string/title_activity_location_maps"></activity>
+            android:label="@string/title_activity_location_maps"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

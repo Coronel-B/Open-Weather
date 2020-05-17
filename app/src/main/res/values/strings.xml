@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Open Weather</string>
 
-    <string name="title_activity_location_maps">Seleccionar ciudad</string>
-    <string name="select_locality">Seleccionar ciudad</string>
-    <string name="text_field_locality">Ciudad</string>
-    <string name="gps_not_enabled">Es necesario habilitar el GPS para que el botón de Mi Ubicación esté disponible</string>
-    <string name="open_location_settings">Habilitar GPS</string>
-    <string name="cancel">Cancelar</string>
+    <string name="title_activity_location_maps">Choose location</string>
+    <string name="select_locality">Choose location</string>
+    <string name="text_field_locality">Location</string>
+    <string name="gps_not_enabled">GPS needs to be enabled for the My Location button to be available</string>
+    <string name="open_location_settings">Enable GPS</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>

@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="@android:color/holo_blue_dark"
-                android:text="Cambiar ubicación"
+                android:text="Change location"
                 app:layout_constraintEnd_toEndOf="@id/location_name"
                 app:layout_constraintTop_toBottomOf="@id/location_name"
                 />

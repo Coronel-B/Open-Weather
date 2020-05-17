@@ -38,11 +38,16 @@ class LocationMapsActivity : AppCompatActivity() {
         return ACTION_PICK_LOCATION == intent.action
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     companion object {
-        val ACTION_PICK_LOCATION = "org.techdev.openweather.action.ACTION_PICK_LOCATION"
+        const val ACTION_PICK_LOCATION = "org.techdev.openweather.action.ACTION_PICK_LOCATION"
 
         //    Representa la ciudad que ya se ha seleccionado
-        val EXTRA_LOCATION = "org.techdev.openweather.EXTRA_LOCATION"
+        const val EXTRA_LOCATION = "org.techdev.openweather.EXTRA_LOCATION"
     }
 
 }

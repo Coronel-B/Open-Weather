@@ -72,8 +72,9 @@ class WeatherCurrentVM : OWViewModel(), RemoteErrorEmitter {
     fun dayOfWeek(): String {
         val calendar = Calendar.getInstance()
         val date = calendar.time
-        val spanishLocale = Locale("es", "ES");
-        val dayOfWeek = SimpleDateFormat("EEEE", spanishLocale).format(date.time)
+        val spanishLocale = Locale("es", "ES")
+        val englishLocale = Locale("en", "EN")
+        val dayOfWeek = SimpleDateFormat("EEEE", englishLocale).format(date.time)
         return dayOfWeek.capitalize()
     }
 
