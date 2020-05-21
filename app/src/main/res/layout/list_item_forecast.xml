@@ -12,49 +12,55 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/day_of_week"
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/cardview_dark_background"
-            android:layout_margin="8dp"
+            android:layout_margin="6dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="SUNDAY"/>
+            tools:text="05-21 03:00"/>
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_margin="8dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="6dp"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/day_of_week"/>
+            app:layout_constraintTop_toBottomOf="@id/date"
+            tools:layout_width="56dp"
+            tools:layout_height="56dp"/>
 
         <TextView
             android:id="@+id/min_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="6dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@id/max_temp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="16°"/>
+            tools:text="16.9°"/>
 
         <TextView
             android:id="@+id/max_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="6dp"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/min_temp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="25°"/>
+            tools:text="25.9°"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

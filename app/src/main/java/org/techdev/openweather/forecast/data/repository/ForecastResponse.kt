@@ -14,7 +14,7 @@ data class Forecast(
     val main: Main,
     val weather: List<Weather>,
     val wind: Wind,
-    val dt_text: String //Time of data forecasted, ISO, UTC
+    val dt_txt: String //Time of data forecasted, ISO, UTC
 )
 
 data class Main(

@@ -14,7 +14,10 @@ import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import org.techdev.openweather.databinding.FragmentListForecastBinding
+import org.techdev.openweather.extensions.checkLocationPermission
+import org.techdev.openweather.extensions.checkLocationProviderEnabled
 import org.techdev.openweather.forecast.vm.ForecastListVM
+import org.techdev.openweather.map.domain.Geolocation
 import org.techdev.openweather.map.vm.GeolocationVM
 import org.techdev.openweather.util.ScreenState
 import pub.devrel.easypermissions.EasyPermissions
@@ -26,8 +29,8 @@ class ForecastListFragment(private val geolocationVM: GeolocationVM) : Fragment(
     EasyPermissions.PermissionCallbacks {
 
     private lateinit var binding: FragmentListForecastBinding
-
     private lateinit var forecastVM: ForecastListVM
+    private lateinit var forecastListAdapter: ForecastListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,18 +39,18 @@ class ForecastListFragment(private val geolocationVM: GeolocationVM) : Fragment(
         // Inflate the layout for this fragment
         binding = FragmentListForecastBinding.inflate(layoutInflater)
 
-        forecastVM = ViewModelProvider(this).get()
+        forecastListAdapter = ForecastListAdapter()
 
-        binding.listRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.listRecyclerView.adapter = forecastListAdapter
 
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-/*
+        forecastVM = ViewModelProvider(this).get()
+
         setupObservers()
-        getForecasts()*/
     }
 
 
@@ -57,24 +60,35 @@ class ForecastListFragment(private val geolocationVM: GeolocationVM) : Fragment(
             binding.listProgressBar.visibility = if (it == ScreenState.LOADING) VISIBLE else GONE
         })
 
+        geolocationVM.currentFusedLocation.observe(viewLifecycleOwner, Observer { geolocation: Geolocation ->
+            getForecasts(geolocation)
+        })
+
+        geolocationVM.geolocationPicked.observe(viewLifecycleOwner, Observer { geolocation: Geolocation? ->
+            geolocation?.let { getForecasts(it) }
+        })
+
         forecastVM.forecasts.observe(viewLifecycleOwner, Observer {
             Log.d("TEST", it.toString())
-
-            //            TODO: Set Adapter
-//            binding.listRecyclerView.adapter = ForecastListAdapter()
+            forecastListAdapter.setSubmitList(it.forecasts)
         })
     }
 
-    private fun getForecasts() {
-        forecastVM.getForecasts()
+    private fun getForecasts(geolocation: Geolocation) {
+        forecastVM.getForecasts(geolocation)
     }
 
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {}
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.d("TEST", "onPermissionsGranted")
+        updateCurrentFusedLocation()
     }
 
+    private fun updateCurrentFusedLocation() {
+        if (checkLocationPermission() && checkLocationProviderEnabled()) {
+            geolocationVM.updateCurrentFusedLocation()
+        }
+    }
 }

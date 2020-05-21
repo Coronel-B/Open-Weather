@@ -14,18 +14,6 @@ import org.techdev.openweather.R
 import pub.devrel.easypermissions.EasyPermissions
 
 /**
- * PRO: Describe la url de un ícono
- * @param: 10n, 13d
- * Source: https://openweathermap.org/weather-conditions
- */
-fun Fragment.getIconUrl(icon: String): String {
-    val baseImageUrl = BuildConfig.BASE_IMG_URL
-    val extension = "@2x.png"
-    val pathAppId = "?appid=${BuildConfig.APP_ID}"
-    return baseImageUrl + icon + extension + pathAppId
-}
-
-/**
  * PRO: Realiza la solicitud del permiso de ubicación
  * PRE: El permiso no tiene que estar habilitado
  * Fuente: https://stackoverflow.com/a/54971368/5279996

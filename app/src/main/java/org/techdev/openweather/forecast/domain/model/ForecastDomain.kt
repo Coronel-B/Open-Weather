@@ -1,14 +1,15 @@
 package org.techdev.openweather.forecast.domain.model
 
+
 data class ForecastList(
-    private val forecasts: List<Forecast>
+    val forecasts: List<Forecast>
 )
 
 data class Forecast(
     val main: Main,
     val weather: Weather,
     val wind: Wind,
-    val dt_text: String //Time of data forecasted, ISO, UTC
+    val dt_txt: String //Time of data forecasted, ISO, UTC
 )
 
 data class Main(

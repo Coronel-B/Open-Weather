@@ -49,13 +49,17 @@ class ForecastDataMapper {
                 forecast.wind.speed,
                 forecast.wind.deg
             ),
-            dt_text = convertDate(forecast.dt)  //TODO: forecast.dt_text
+            dt_txt = formatterDate(forecast.dt_txt)
         )
     }
 
     private fun convertDate(date: Long): String {
         val dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
         return dateFormat.format(date)
+    }
+
+    private fun formatterDate(date: String): String {
+        return date.substring(5).take(11)
     }
 
 }

@@ -6,7 +6,7 @@ import org.techdev.openweather.forecast.data.service.ForecastService
 import org.techdev.openweather.map.domain.Geolocation
 import org.techdev.openweather.util.RemoteErrorEmitter
 
-class ForecastRepositoryRemote(private val apiCallManager: APICallManager) :
+class ForecastRemoteRepository(private val apiCallManager: APICallManager) :
     ForecastRepository.RemoteRepository {
 
     private val forecastService = RetrofitService.createService(ForecastService::class.java)

@@ -77,13 +77,11 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
             binding.weatherCurrentProgressBar.visibility = if (it == ScreenState.LOADING) View.VISIBLE else View.GONE
         })
 
-//        Cuando no hay ninguna ubicación seleccionada
         geolocationVM.currentFusedLocation.observe(viewLifecycleOwner, Observer { geolocation: Geolocation ->
-//            TODO: Tirar el request para obtener el clima solo cuando se inicia la app y cada vez que no llega algo en la seleccion del mapa
             getWeatherCurrent(geolocation)
         })
 
-        weatherVM.geolocationPicked.observe(viewLifecycleOwner, Observer { geolocation: Geolocation? ->
+        geolocationVM.geolocationPicked.observe(viewLifecycleOwner, Observer { geolocation: Geolocation? ->
             geolocation?.let { getWeatherCurrent(it) }
         })
 
@@ -103,10 +101,10 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
         binding.locationName.text = weather.city
         binding.changeLocation.visibility = VISIBLE
 
-        binding.temp.text = weatherVM.convertToDegreeCelcius(weather.temp.toDouble())
+        binding.temp.text = convertToDegreeCelcius(weather.temp.toDouble())
         binding.measurementUnit.visibility = VISIBLE
 
-        binding.dayOfWeek.text = weatherVM.dayOfWeek()
+        binding.dayOfWeek.text = dayOfWeek()
         binding.description.text = weather.description
 
         binding.changeLocation.setOnClickListener {
@@ -125,7 +123,7 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
             REQUEST_PICK_LOCATION -> {
                 if (resultCode == Activity.RESULT_OK && ::binding.isInitialized) {
                     geolocationPicked = data?.getParcelableExtra(LocationMapsActivity.EXTRA_LOCATION)
-                    weatherVM.setGeolocationPicked(geolocationPicked)
+                    geolocationVM.setGeolocationPicked(geolocationPicked)
                 }
                 return
             }

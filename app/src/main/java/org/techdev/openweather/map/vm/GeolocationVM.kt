@@ -18,8 +18,10 @@ class GeolocationVM(val context: Context) : OWViewModel() {
     private var fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
     private val _currentFusedLocation = MutableLiveData<Geolocation>()
-
     val currentFusedLocation: LiveData<Geolocation> = _currentFusedLocation
+
+    private val _geolocationPicked = MutableLiveData<Geolocation?>()
+    val geolocationPicked: LiveData<Geolocation?> = _geolocationPicked
 
     init {
         Log.d("GeolocationVM", "@Singleton LocationVM")
@@ -53,6 +55,10 @@ class GeolocationVM(val context: Context) : OWViewModel() {
 
     fun setCurrentFusedLocation(newLatLngLocation: Geolocation) {
         _currentFusedLocation.value = newLatLngLocation
+    }
+
+    fun setGeolocationPicked(geolocation: Geolocation?) {
+        _geolocationPicked.value = geolocation
     }
 
 }
