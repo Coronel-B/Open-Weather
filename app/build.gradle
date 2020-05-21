@@ -14,7 +14,7 @@ android {
         versionName "1.0"
 
         buildConfigField("String", "BASE_URL", "\"https://api.openweathermap.org/data/2.5/\"")
-        buildConfigField("String", "BASE_IMG_URL", "\"http://openweathermap.org/img/wn/\"")
+        buildConfigField("String", "BASE_IMG_URL", "\"https://openweathermap.org/img/wn/\"")
         buildConfigField("String", "APP_ID", "\"d6842bc2ee8ad484e20158713143979d\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
