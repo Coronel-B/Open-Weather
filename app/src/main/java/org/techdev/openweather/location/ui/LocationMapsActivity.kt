@@ -1,4 +1,4 @@
-package org.techdev.openweather.map.ui
+package org.techdev.openweather.location.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

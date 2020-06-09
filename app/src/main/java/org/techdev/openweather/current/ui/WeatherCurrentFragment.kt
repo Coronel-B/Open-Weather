@@ -17,9 +17,9 @@ import org.techdev.openweather.current.vm.WeatherCurrentVM
 import org.techdev.openweather.databinding.FragmentCurrentWeatherBinding
 import org.techdev.openweather.current.domain.model.WeatherCurrent
 import org.techdev.openweather.extensions.*
-import org.techdev.openweather.map.domain.Geolocation
-import org.techdev.openweather.map.ui.LocationMapsActivity
-import org.techdev.openweather.map.vm.GeolocationVM
+import org.techdev.openweather.location.domain.Geolocation
+import org.techdev.openweather.location.ui.LocationMapsActivity
+import org.techdev.openweather.location.vm.GeolocationVM
 import org.techdev.openweather.util.ScreenState
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -108,7 +108,8 @@ class WeatherCurrentFragment(private val geolocationVM: GeolocationVM) : Fragmen
         binding.description.text = weather.description
 
         binding.changeLocation.setOnClickListener {
-            weatherVM.showOriginLocalityPickerScreen(this@WeatherCurrentFragment)
+//            weatherVM.showOriginLocalityPickerScreen(this@WeatherCurrentFragment) //TODO
+            fragmentManager?.let { it1 -> weatherVM.showChangeLocationDialogFragment(it1) }
         }
     }
 

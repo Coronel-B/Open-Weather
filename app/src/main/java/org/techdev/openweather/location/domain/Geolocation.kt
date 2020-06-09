@@ -1,4 +1,4 @@
-package org.techdev.openweather.map.domain
+package org.techdev.openweather.location.domain
 
 import android.os.Parcelable
 import com.google.android.gms.maps.model.LatLng

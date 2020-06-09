@@ -1,6 +1,6 @@
 package org.techdev.openweather.current.domain.model
 
-import org.techdev.openweather.map.domain.Geolocation
+import org.techdev.openweather.location.domain.Geolocation
 
 data class WeatherCurrent(
     val id: Int,

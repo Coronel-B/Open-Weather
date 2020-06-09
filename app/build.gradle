@@ -57,12 +57,16 @@ android {
 
 }
 
+/**
+ * Source:
+ * . https://stackoverflow.com/a/58662077/5279996
+ */
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     implementation 'com.google.android.material:material:1.1.0'
@@ -84,6 +88,7 @@ dependencies {
 //    Retrofit
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation 'org.conscrypt:conscrypt-android:2.2.1'  // OkHttp is compatible with the Conscrypt security library
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version") {
         // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
         exclude module: 'okhttp'

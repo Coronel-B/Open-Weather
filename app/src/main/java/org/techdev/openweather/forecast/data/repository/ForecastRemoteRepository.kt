@@ -3,7 +3,7 @@ package org.techdev.openweather.forecast.data.repository
 import org.techdev.openweather.data.retrofit.RetrofitService
 import org.techdev.openweather.data.retrofit.service.APICallManager
 import org.techdev.openweather.forecast.data.service.ForecastService
-import org.techdev.openweather.map.domain.Geolocation
+import org.techdev.openweather.location.domain.Geolocation
 import org.techdev.openweather.util.RemoteErrorEmitter
 
 class ForecastRemoteRepository(private val apiCallManager: APICallManager) :

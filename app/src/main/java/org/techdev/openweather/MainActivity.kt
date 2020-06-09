@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import org.techdev.openweather.current.ui.WeatherCurrentFragment
 import org.techdev.openweather.forecast.ui.ForecastListFragment
-import org.techdev.openweather.map.vm.GeolocationVM
+import org.techdev.openweather.location.vm.GeolocationVM
 
 class MainActivity : AppCompatActivity() {
 

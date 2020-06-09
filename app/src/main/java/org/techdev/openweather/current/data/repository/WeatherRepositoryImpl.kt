@@ -3,7 +3,7 @@ package org.techdev.openweather.current.data.repository
 import org.techdev.openweather.util.RemoteErrorEmitter
 import org.techdev.openweather.current.domain.mappers.WeatherDataMapper
 import org.techdev.openweather.current.domain.model.WeatherCurrent
-import org.techdev.openweather.map.domain.Geolocation
+import org.techdev.openweather.location.domain.Geolocation
 
 class WeatherRepositoryImpl(private val remoteRepository: WeatherRepository.RemoteRepository) :
     WeatherRepository {

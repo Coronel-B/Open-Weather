@@ -11,14 +11,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
-import androidx.recyclerview.widget.LinearLayoutManager
 
 import org.techdev.openweather.databinding.FragmentListForecastBinding
 import org.techdev.openweather.extensions.checkLocationPermission
 import org.techdev.openweather.extensions.checkLocationProviderEnabled
 import org.techdev.openweather.forecast.vm.ForecastListVM
-import org.techdev.openweather.map.domain.Geolocation
-import org.techdev.openweather.map.vm.GeolocationVM
+import org.techdev.openweather.location.domain.Geolocation
+import org.techdev.openweather.location.vm.GeolocationVM
 import org.techdev.openweather.util.ScreenState
 import pub.devrel.easypermissions.EasyPermissions
 

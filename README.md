@@ -14,7 +14,7 @@ References:
  - https://github.com/shawnlinboy/retrofit-livedata-adapter
  - https://dev.to/eagskunst/making-safe-api-calls-with-retrofit-and-coroutines-1121
  - https://proandroiddev.com/using-retrofit-2-with-kotlin-coroutines-cb112f0fb738
-            https://github.com/zedlabs/WallPortal
+    - https://github.com/zedlabs/WallPortal
 
 Upcoming:
  - https://medium.com/artisans-of-tech/supercharging-retrofit-with-generics-adapters-callbacks-51ae57618a0

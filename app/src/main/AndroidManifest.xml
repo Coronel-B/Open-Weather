@@ -17,7 +17,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -33,7 +34,7 @@
 
         <!-- NoActionBar avoid interference with your custom toolbar-->
         <activity
-            android:name=".map.ui.LocationMapsActivity"
+            android:name=".location.ui.LocationMapsActivity"
             android:label="@string/title_activity_location_maps"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
 

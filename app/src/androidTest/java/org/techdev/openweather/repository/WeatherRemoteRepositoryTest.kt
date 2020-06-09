@@ -1,12 +1,10 @@
 package org.techdev.openweather.repository
 
 import android.content.Context
-import android.util.Log
 import androidx.test.core.app.ApplicationProvider
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Assert
@@ -16,7 +14,7 @@ import org.techdev.openweather.current.data.repository.WeatherResponse
 import org.techdev.openweather.current.data.service.WeatherService
 import org.techdev.openweather.data.retrofit.RetrofitService
 import org.techdev.openweather.data.retrofit.service.APICallManager
-import org.techdev.openweather.map.domain.Geolocation
+import org.techdev.openweather.location.domain.Geolocation
 import org.techdev.openweather.util.ErrorType
 import org.techdev.openweather.util.RemoteErrorEmitter
 

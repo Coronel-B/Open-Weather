@@ -3,7 +3,7 @@ package org.techdev.openweather.current.domain.mappers
 import com.google.android.gms.maps.model.LatLng
 import org.techdev.openweather.current.data.repository.WeatherResponse
 import org.techdev.openweather.current.domain.model.WeatherCurrent
-import org.techdev.openweather.map.domain.Geolocation
+import org.techdev.openweather.location.domain.Geolocation
 
 /**
  * Maps the data to the domain model

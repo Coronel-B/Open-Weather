@@ -1,10 +1,7 @@
 package org.techdev.openweather.forecast.data.service
 
-import com.google.gson.JsonObject
 import org.techdev.openweather.BuildConfig
-import org.techdev.openweather.current.data.repository.WeatherResponse
 import org.techdev.openweather.forecast.data.repository.ForecastResponse
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 

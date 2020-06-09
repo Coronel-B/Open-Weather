@@ -1,4 +1,4 @@
-package org.techdev.openweather.map.vm
+package org.techdev.openweather.location.vm
 
 import android.content.Context
 import android.location.Location
@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
-import org.techdev.openweather.map.domain.Geolocation
+import org.techdev.openweather.location.domain.Geolocation
 import org.techdev.openweather.util.OWViewModel
 
 /**

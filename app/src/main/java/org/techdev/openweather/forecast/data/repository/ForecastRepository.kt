@@ -1,7 +1,7 @@
 package org.techdev.openweather.forecast.data.repository
 
 import org.techdev.openweather.forecast.domain.model.ForecastList
-import org.techdev.openweather.map.domain.Geolocation
+import org.techdev.openweather.location.domain.Geolocation
 import org.techdev.openweather.util.RemoteErrorEmitter
 
 interface ForecastRepository {

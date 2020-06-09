@@ -1,4 +1,4 @@
-package org.techdev.openweather.map.ui
+package org.techdev.openweather.location.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -14,7 +14,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
-import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.*
@@ -22,7 +21,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import org.techdev.openweather.R
-import org.techdev.openweather.map.domain.Geolocation
+import org.techdev.openweather.location.domain.Geolocation
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.EasyPermissions.PermissionCallbacks
 

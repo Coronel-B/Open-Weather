@@ -2,6 +2,7 @@ package org.techdev.openweather.current.vm
 
 import android.content.Intent
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,8 +12,9 @@ import org.techdev.openweather.current.data.repository.WeatherRemoteRepository
 import org.techdev.openweather.current.data.repository.WeatherRepositoryImpl
 import org.techdev.openweather.data.retrofit.service.APICallManager
 import org.techdev.openweather.current.domain.model.WeatherCurrent
-import org.techdev.openweather.map.domain.Geolocation
-import org.techdev.openweather.map.ui.LocationMapsActivity
+import org.techdev.openweather.location.domain.Geolocation
+import org.techdev.openweather.location.ui.ChangeLocationDialogFragment
+import org.techdev.openweather.location.ui.LocationMapsActivity
 import org.techdev.openweather.util.OWViewModel
 import org.techdev.openweather.util.RemoteErrorEmitter
 import org.techdev.openweather.util.ScreenState
@@ -47,6 +49,15 @@ class WeatherCurrentVM : OWViewModel(), RemoteErrorEmitter {
         val requestIntent = Intent(context.activity, LocationMapsActivity::class.java)
         requestIntent.action = LocationMapsActivity.ACTION_PICK_LOCATION
         context.startActivityForResult(requestIntent, WeatherCurrentFragment.REQUEST_PICK_LOCATION)
+    }
+
+    /**
+     * PRO: Inicia un diálogo para elegir la ubicación
+     */
+    fun showChangeLocationDialogFragment(fragmentManager: FragmentManager) {
+        val dialog = ChangeLocationDialogFragment()
+        dialog.show(fragmentManager, "Change Location")
+
     }
 
 }

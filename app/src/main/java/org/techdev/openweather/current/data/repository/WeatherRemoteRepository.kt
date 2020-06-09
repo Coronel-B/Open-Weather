@@ -4,7 +4,7 @@ import org.techdev.openweather.data.retrofit.RetrofitService
 import org.techdev.openweather.data.retrofit.service.APICallManager
 import org.techdev.openweather.util.RemoteErrorEmitter
 import org.techdev.openweather.current.data.service.WeatherService
-import org.techdev.openweather.map.domain.Geolocation
+import org.techdev.openweather.location.domain.Geolocation
 
 class WeatherRemoteRepository(private val apiCallManager: APICallManager) :
     WeatherRepository.RemoteRepository {
