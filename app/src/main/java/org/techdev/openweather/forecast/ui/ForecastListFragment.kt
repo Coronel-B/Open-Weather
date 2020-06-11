@@ -39,7 +39,6 @@ class ForecastListFragment(private val geolocationVM: GeolocationVM) : Fragment(
         binding = FragmentListForecastBinding.inflate(layoutInflater)
 
         forecastListAdapter = ForecastListAdapter()
-
         binding.listRecyclerView.adapter = forecastListAdapter
 
         return binding.root

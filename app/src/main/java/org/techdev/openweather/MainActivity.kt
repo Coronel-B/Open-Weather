@@ -1,18 +1,25 @@
 package org.techdev.openweather
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.fragment.app.Fragment
 import org.techdev.openweather.current.ui.WeatherCurrentFragment
 import org.techdev.openweather.forecast.ui.ForecastListFragment
+import org.techdev.openweather.location.vm.ChangeLocationDialogVM
 import org.techdev.openweather.location.vm.GeolocationVM
 
 class MainActivity : AppCompatActivity() {
 
     private var geolocationVM: GeolocationVM? = null
+    private var changeLocationVM: ChangeLocationDialogVM? = null
 
     private var weatherCurrentFragment: WeatherCurrentFragment? = null
     private var forecastListFragment: ForecastListFragment? = null
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,5 +63,4 @@ class MainActivity : AppCompatActivity() {
         }
         return forecastListFragment as ForecastListFragment
     }
-
 }

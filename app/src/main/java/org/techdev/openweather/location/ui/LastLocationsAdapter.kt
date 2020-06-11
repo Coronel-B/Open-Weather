@@ -14,6 +14,12 @@ import org.techdev.openweather.location.domain.LastLocation
 class LastLocationsAdapter :
         ListAdapter<LastLocation, LastLocationsAdapter.LastLocationViewHolder>(LastLocationCallback()) {
 
+
+        fun setSubmitList(lastLocations: List<LastLocation>) {
+                submitList(lastLocations)
+                notifyDataSetChanged()
+        }
+
         class LastLocationViewHolder(lastLocationView: View) : RecyclerView.ViewHolder(lastLocationView) {
 
                 private val name = lastLocationView.findViewById<TextView>(R.id.name)
