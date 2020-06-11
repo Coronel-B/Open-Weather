@@ -32,13 +32,11 @@ class ChangeLocationDialogVM: OWViewModel() {
     }
 
     fun addLastLocationToList(lastLocation: LastLocation) {
-        if (sharedPreferences != null) {
-            if (thereIsSlot()) {
-                add(lastLocation)
-            } else {
-                remove(lastLocation)
-                add(lastLocation)
-            }
+        if (thereIsSlot()) {
+            add(lastLocation)
+        } else {
+            remove(lastLocation)
+            add(lastLocation)
         }
     }
 
@@ -55,10 +53,11 @@ class ChangeLocationDialogVM: OWViewModel() {
 
         val json: String = gson.toJson(lastLocations)
 
-        with(sharedPreferences!!.edit()) {
+//        TODO: LLenar el shared
+      /*  with(sharedPreferences.edit()) {
             putString("lastLocations", json)
             commit()
-        }
+        }*/
     }
 
     private fun remove(lastLocation: LastLocation) {

@@ -35,6 +35,8 @@ class ChangeLocationDialogFragment(): DialogFragment() {
     private val sharedPreferences: SharedPreferences? =
         activity?.getSharedPreferences("prefs_open_weather", Context.MODE_PRIVATE)
 
+    val test = this.activity?.getSharedPreferences("test", Context.MODE_PRIVATE)
+
     /**
      * OBS: Tambien se podria setear el adapter antes de devolver el dialogo
      */
@@ -76,6 +78,8 @@ class ChangeLocationDialogFragment(): DialogFragment() {
 
     private fun setupObservers() {
         changeLocationVM.provideSharedPreferences(sharedPreferences)
+
+        Log.d("TEST", test.toString())
 
         changeLocationVM.addLastLocationToList(
             LastLocation("CABA", Geolocation(LatLng(0.0,0.0)))
